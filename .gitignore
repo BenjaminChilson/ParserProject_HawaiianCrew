@@ -1,3 +1,7 @@
+#intelij
+.idea
+*.iml
+
 # Compiled class file
 *.class
 
