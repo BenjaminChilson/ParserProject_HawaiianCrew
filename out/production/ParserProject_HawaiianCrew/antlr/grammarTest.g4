@@ -1,6 +1,10 @@
 grammar grammarTest;
 //prule: 'hello' CHAR+;
 
+@header{
+    package antlr;
+}
+
 prule: ifelseelif block+;
 if_rule: IF_STATEMENT block?;
 elif_rule: ELIF_STATEMENT block?;
