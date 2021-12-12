@@ -5,7 +5,6 @@ grammar grammarTest;
     package antlr;
 }
 
-comment: '#' ~('\n')*;
 prule: ifelseelif block+;
 controlFlow: ifelseelif;
 if_statement: IF expr ':\n' block?;
