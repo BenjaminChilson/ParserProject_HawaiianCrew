@@ -5,40 +5,54 @@ grammar grammarTest;
     package antlr;
 }
 
-IF_STATEMENT: 'if';
-ELIF_STATEMENT: 'elif';
-ELSE_STATEMENT: 'else';
-OPERATOR: '*'
-        | '/'
-        | '+'
-        | '-'
-        ;
-COMPARISON: '=='
-          | '>'
-          | '>='
-          | '<'
-          | '<='
-          ;
-ID: [a-zA-Z][a-zA-Z0-9_]*;
-NUM: '0' | '-'?[1-9][0-9]*;
-WS: [ \t\n]+ -> skip;
-CHAR: 'a'..'z'+(' '('a'..'z')+)*;
-TAB: '\t' | '    ';
-
 prule: ifelseelif block+;
 controlFlow: ifelseelif;
-loop: ;
-if_rule: IF_STATEMENT expr ':\n' block?;
-elif_rule: ELIF_STATEMENT expr ':\n' block?;
-else_rule: ELSE_STATEMENT ':\n' block?;
+if_statement: IF expr ':\n' block?;
+elif_rule: ELIF expr ':\n' block?;
+else_rule: ELSE ':\n' block?;
 block: (TAB CHAR+'\n')+;
-ifelseelif: if_rule (elif_rule)* (else_rule)?;
+ifelseelif: if_statement (elif_rule)* (else_rule)?;
 
-prog: (decl | expr | controlFlow)+ EOF;
+prog: (decl | expr)+ EOF;
 decl: ID '=' expr;
-expr: expr OPERATOR expr
-    | expr COMPARISON expr
+expr: expr CONDITIONAL expr
+    | expr ARITHMETIC expr
     | ID
     | NUM
     ;
 
+
+IF: 'if';
+ELIF: 'elif';
+ELSE: 'else';
+ARITHMETIC  : '*'
+            | '/'
+            | '+'
+            | '-'
+            | '%'
+            | '^'
+            ;
+ASSIGNMENT  : '='
+            | '+='
+            | '-='
+            | '*='
+            | '/='
+            | '^='
+            | '%='
+            ;
+CONDITIONAL : '=='
+            | '>'
+            | '>='
+            | '<'
+            | '<='
+            | 'and'
+            | 'or'
+            | 'not'
+            ;
+ID: [a-zA-Z][a-zA-Z0-9_]*;
+NUM: '0' | '-'?[1-9][0-9]*;
+CHAR: 'a'..'z'+(' '('a'..'z')+)*;
+COMMENT: '#' ~('\n')* -> skip;
+NL: '\n' -> skip;
+WS: [ \t\n] -> skip;
+TAB: '\t' | '    ';
