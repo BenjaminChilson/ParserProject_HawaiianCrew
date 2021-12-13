@@ -8,6 +8,7 @@ grammar grammartest;
     package antlr;
 }
 
+
 IF_STATEMENT: 'if';
 ELIF_STATEMENT: 'elif';
 ELSE_STATEMENT: 'else';
@@ -46,16 +47,56 @@ loop: ;
 if_rule: IF_STATEMENT OPEN_PAREN? expr CLOSE_PAREN? ':\n' block?;
 elif_rule: ELIF_STATEMENT expr ':\n' block?;
 else_rule: ELSE_STATEMENT ':\n' block?;
+
 block: (TAB CHAR+'\n')+;
-ifelseelif: if_rule (elif_rule)* (else_rule)?;
+ifelseelif: if_statement (elif_rule)* (else_rule)?;
+
 
 prog: (decl | expr | controlFlow | statement)+ EOF;
+
 decl: ID '=' expr;
-expr: expr OPERATOR expr
-    | expr COMPARISON expr
+expr: expr CONDITIONAL expr
+    | expr ARITHMETIC expr
     | ID
     | NUM
     ;
 
+
 // Work in progress
 statement: print_rule;
+
+IF: 'if';
+ELIF: 'elif';
+ELSE: 'else';
+ARITHMETIC  : '*'
+            | '/'
+            | '+'
+            | '-'
+            | '%'
+            | '^'
+            ;
+ASSIGNMENT  : '='
+            | '+='
+            | '-='
+            | '*='
+            | '/='
+            | '^='
+            | '%='
+            ;
+CONDITIONAL : '=='
+            | '>'
+            | '>='
+            | '<'
+            | '<='
+            | 'and'
+            | 'or'
+            | 'not'
+            ;
+ID: [a-zA-Z][a-zA-Z0-9_]*;
+NUM: '0' | '-'?[1-9][0-9]*;
+CHAR: 'a'..'z'+(' '('a'..'z')+)*;
+COMMENT: '#' ~('\n')* -> skip;
+NL: '\n' -> skip;
+WS: [ \t\n] -> skip;
+TAB: '\t' | '    ';
+
