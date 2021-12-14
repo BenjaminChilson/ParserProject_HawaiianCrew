@@ -1,0 +1,19 @@
+T__0=1
+T__1=2
+T__2=3
+T__3=4
+T__4=5
+ARITHMETIC=6
+ASSIGNMENT=7
+CONDITIONAL=8
+ID=9
+NUM=10
+NEWLINE=11
+INDENT=12
+DEDENT=13
+SKIP_=14
+'if condition_here:'=1
+'elif condition_here:'=2
+'else:'=3
+'#'=4
+'='=5

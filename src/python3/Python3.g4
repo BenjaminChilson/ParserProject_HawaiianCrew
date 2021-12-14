@@ -1,7 +1,10 @@
-grammar grammarTest;
+grammar Python3;
 
+@header {
+	package python3;
+}
 
-/// Java code borrowed from
+/// Java code borrowed from 
 /// https://stackoverflow.com/questions/8642154/antlr-what-is-simpliest-way-to-realize-python-like-indent-depending-grammar
 
 @lexer::members {
@@ -144,10 +147,8 @@ if_statement: 'if condition_here:' block ('elif condition_here:' block)* ('else:
 
 /// while_statement: 'while condition_here:' block;
 
-/// probably should name statement something more generic
 statement: (decl | comment) NEWLINE;
 
-/// incomplete, just threw ID on there because I was lazy
 comment: '#' ID;
 
 block: statement | NEWLINE INDENT statement+ DEDENT;
@@ -184,7 +185,7 @@ CONDITIONAL : '=='
             | 'or'
             | 'not'
             ;
-
+            
 ID: [a-zA-Z][a-zA-Z0-9_]*;
 NUM: '0' | '-'?[1-9][0-9]*;
 
