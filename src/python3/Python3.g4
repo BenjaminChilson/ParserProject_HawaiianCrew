@@ -196,8 +196,8 @@ NEWLINE
    {onNewLine();}
  ;
 
-INDENT: ;
-DEDENT: ;
+INDENT: 'dhsdhdsiuhfsdfhsfnhsd';
+DEDENT: 'dhdsnhsdfsfdsfdsdf';
 
 SKIP_
  : ( SPACES | LINE_JOINING | '\n') -> skip
