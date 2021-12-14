@@ -1,30 +1,47 @@
-grammar grammarTest;
-//prule: 'hello' CHAR+;
+/* ANTLR4 Grammar for Python 3
+ * Principles of Programming Hawaiian Crew:
+ * Ben Chilson, Matt Hackmann, and Nate Beattie
+*/
+grammar pythongrammar;
 
 @header{
     package antlr;
 }
 
-prule: ifelseelif block+;
-controlFlow: ifelseelif;
-if_statement: IF expr ':\n' block?;
-elif_rule: ELIF expr ':\n' block?;
-else_rule: ELSE ':\n' block?;
-block: (TAB CHAR+'\n')+;
-ifelseelif: if_statement (elif_rule)* (else_rule)?;
+// PARSER RULES:
+comment: COMMENT ;
+// Parse functions like range(0,6) and str(integer). cases such as print(str(integer)) do not parse correctly
+function: FUNCTION OPEN_PAREN expr+ (','+expr)* CLOSE_PAREN ;
+if_rule: IF_STATEMENT OPEN_PAREN? expr CLOSE_PAREN? COLON  block?;
+elif_rule: ELIF_STATEMENT expr COLON  block?;
+else_rule: ELSE_STATEMENT COLON  block?;
 
-prog: (decl | expr)+ EOF;
-decl: ID '=' expr;
-expr: expr CONDITIONAL expr
-    | expr ARITHMETIC expr
+// Rule for entire python program
+program: (expr | comment)+ EOF;
+expr: expr ARITHMETIC expr
+    | expr CONDITIONAL expr
+    | expr ASSIGNMENT expr
     | ID
     | NUM
+    | STRING
+    | function
     ;
+// RULES in progress:
+prule: ifelseelif block+;
+controlFlow: ifelseelif;
+loop: ;
 
+block: (TAB CHAR+ NEWLINE)+;
+ifelseelif: if_rule (elif_rule)* (else_rule)?;
 
-IF: 'if';
-ELIF: 'elif';
-ELSE: 'else';
+// LEXER RULES:
+COMMENT: '#' ~('\n' )+;
+IF_STATEMENT: 'if';
+ELIF_STATEMENT: 'elif';
+ELSE_STATEMENT: 'else';
+// 3 Functions used in the test code
+FUNCTION: 'print' | 'range' | 'str';
+
 ARITHMETIC  : '*'
             | '/'
             | '+'
@@ -51,8 +68,15 @@ CONDITIONAL : '=='
             ;
 ID: [a-zA-Z][a-zA-Z0-9_]*;
 NUM: '0' | '-'?[1-9][0-9]*;
-CHAR: 'a'..'z'+(' '('a'..'z')+)*;
-COMMENT: '#' ~('\n')* -> skip;
-NL: '\n' -> skip;
-WS: [ \t\n] -> skip;
+CHAR: 'a'..'z'+(('a'..'z')+)*;
 TAB: '\t' | '    ';
+OPEN_PAREN: '(';
+CLOSE_PAREN: ')';
+
+QUOTE: '"'|'\'';
+STRING: QUOTE [\u0000-\u00FF]* QUOTE;
+WHITESPACE: ' ' -> skip;
+COLON: ':';
+NEWLINE: '\n' -> skip;
+// Catchall rule
+ANY: . ;
