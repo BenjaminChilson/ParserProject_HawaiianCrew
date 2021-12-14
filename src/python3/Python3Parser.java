@@ -35,7 +35,7 @@ public class Python3Parser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'if condition_here:'", "'elif condition_here:'", "'else:'", "'#'", 
-			"'='"
+			"'='", null, null, null, null, null, null, "'addujfnfsncns'", "'bcsdncdncjknsjncd'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();

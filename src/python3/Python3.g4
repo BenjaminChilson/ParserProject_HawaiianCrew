@@ -1,5 +1,7 @@
 grammar Python3;
 
+
+
 @header {
 	package python3;
 }
@@ -196,8 +198,8 @@ NEWLINE
    {onNewLine();}
  ;
 
-INDENT: 'dhsdhdsiuhfsdfhsfnhsd';
-DEDENT: 'dhdsnhsdfsfdsfdsdf';
+INDENT: 'addujfnfsncns';
+DEDENT: 'bcsdncdncjknsjncd';
 
 SKIP_
  : ( SPACES | LINE_JOINING | '\n') -> skip
