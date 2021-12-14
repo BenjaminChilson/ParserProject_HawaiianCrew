@@ -14,3 +14,11 @@ We mostly followed [this video](https://www.youtube.com/watch?v=svEZtRjVBTY) for
 # How to use our parser: 
 When you have written a grammar you are ready to test, you first need to right click anywhere in the file and select "Generate ANTLR Recognizer". This will generate files in the /gen folder in your project directory. Then, right click on the parser rule you want to test, and click "Test Rule <name_of_rule\>". This will show an ANTLR preview at the bottom of the screen, where you can type in code to test your parser rules. The video linked above shows this process as well. 
 # Demo Video
+
+
+#compilation instructions
+
+1. First cd into the src/antlr directory.
+2. Second run the ```$ java -jar ./lib/antlr-4.9.2-complete.jar ./grammar/grammarTest.g4``` command (this updates the generated files in the antlr directory)
+3. Third run the ```$ javac -cp ./lib/antlr-4.9.2-complete.jar grammarTest*.java``` command (this compiles the generated java codes in the antlr directory)
+4. Forth run the ```$ java -cp ./lib/antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig grammarTest prog -gui ./testCode/python_test_code.py``` command. If all works, this should produce the parse tree
