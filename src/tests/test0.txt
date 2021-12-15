@@ -1,0 +1,9 @@
+dsdjsdi = 908
+
+if condition_here:
+	dsjdsj = 90
+
+nj = 90
+jdijd = 90
+
+#cddnjdnddj
