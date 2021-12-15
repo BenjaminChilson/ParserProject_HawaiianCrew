@@ -143,25 +143,46 @@ grammar Python3;
 
 prog: (control_flow | statement)* EOF;
 
-control_flow: if_statement;
+function: FUNCTION OPEN_PAREN expr+ (','+expr)* CLOSE_PAREN;
 
-if_statement: 'if condition_here:' block ('elif condition_here:' block)* ('else:' block)?;
+control_flow: if_statement | while_statement | for_loop;
 
-/// while_statement: 'while condition_here:' block;
+if_statement: 'if' OPEN_PAREN? expr CLOSE_PAREN? ':' block ('elif' expr ':' block)* ('else:' block)?;
 
-statement: (decl | comment) NEWLINE;
+for_loop: FOR ID IN function COLON block;
 
-comment: '#' ID;
+while_statement: 'while' expr ':' block;
 
-block: statement | NEWLINE INDENT statement+ DEDENT;
+statement: (decl | COMMENT | expr | function) NEWLINE;
+
+block: (statement | control_flow) | NEWLINE INDENT (statement | control_flow)+ DEDENT;
 
 decl: ID '=' expr;
 
 expr: expr CONDITIONAL expr
     | expr ARITHMETIC expr
+    | expr ASSIGNMENT expr
     | ID
     | NUM
+    | STRING
+    | function
     ;
+    
+COMMENT: '#' ~[\r\n\f]*;
+
+IF_STATEMENT: 'if';
+ELIF_STATEMENT: 'elif';
+ELSE_STATEMENT: 'else';
+WHILE: 'while';
+FOR: 'for';
+IN: 'in';
+
+OPEN_PAREN: '(';
+CLOSE_PAREN: ')';
+
+STRING : '"' (~('"'))* '"' ;
+
+FUNCTION: 'print' | 'range' | 'str' | 'int';
 
 ARITHMETIC  : '*'
             | '/'
@@ -183,6 +204,7 @@ CONDITIONAL : '=='
             | '>='
             | '<'
             | '<='
+            | '!='
             | 'and'
             | 'or'
             | 'not'
@@ -191,6 +213,8 @@ CONDITIONAL : '=='
 ID: [a-zA-Z][a-zA-Z0-9_]*;
 NUM: '0' | '-'?[1-9][0-9]*;
 
+COLON: ':';
+
 NEWLINE
  : ( {atStartOfInput()}?   SPACES
    | ( '\r'? '\n' | '\r' | '\f' ) SPACES?
@@ -198,8 +222,9 @@ NEWLINE
    {onNewLine();}
  ;
 
-INDENT: 'addujfnfsncns';
-DEDENT: 'bcsdncdncjknsjncd';
+/// Rules don't work when empty, so I had to add some unmatchable string to them
+INDENT: 'addu#@#jfn*fsncn#!(#*s';
+DEDENT: 'bcsdncd3!#(8!)#ncjknsjncd';
 
 SKIP_
  : ( SPACES | LINE_JOINING | '\n') -> skip
