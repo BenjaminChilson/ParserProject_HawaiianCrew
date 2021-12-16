@@ -35,7 +35,7 @@ grammar PythonGrammar;
             }
 
             // First emit an extra line break that serves as the end of the statement.
-            this.emit(commonToken(Python3Lexer.NEWLINE, "\n"));
+            this.emit(commonToken(NEWLINE, "\n"));
 
             // Now emit as much DEDENT tokens as needed.
             while (!indents.isEmpty()) {
@@ -44,7 +44,7 @@ grammar PythonGrammar;
             }
 
             // Put the EOF back on the token stream.
-            this.emit(commonToken(Python3Lexer.EOF, "<EOF>"));
+            this.emit(commonToken(EOF, "<EOF>"));
         }
 
         Token next = super.nextToken();
@@ -58,7 +58,7 @@ grammar PythonGrammar;
     }
 
     private Token createDedent() {
-        CommonToken dedent = commonToken(Python3Lexer.DEDENT, "");
+        CommonToken dedent = commonToken(DEDENT, "");
         dedent.setLine(this.lastToken.getLine());
         return dedent;
     }
@@ -119,7 +119,7 @@ grammar PythonGrammar;
             skip();
         }
         else {
-            emit(commonToken(Python3Lexer.NEWLINE, newLine));
+            emit(commonToken(NEWLINE, newLine));
             int indent = getIndentationCount(spaces);
             int previous = indents.isEmpty() ? 0 : indents.peek();
             if (indent == previous) {
@@ -128,7 +128,7 @@ grammar PythonGrammar;
             }
             else if (indent > previous) {
                 indents.push(indent);
-                emit(commonToken(Python3Lexer.INDENT, spaces));
+                emit(commonToken(INDENT, spaces));
             }
             else {
                 // Possibly emit more than 1 DEDENT token.

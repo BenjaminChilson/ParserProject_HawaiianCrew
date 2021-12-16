@@ -1,7 +1,7 @@
 #antlr auto-generated files
-pythonGrammar/*.java
-pythonGrammar/*.interp
-pythonGrammar/*.tokens
+*.java
+*.interp
+*.tokens
 .antlr/
 
 #other generate files from IDEs
