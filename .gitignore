@@ -4,6 +4,9 @@ pythonGrammar/*.interp
 pythonGrammar/*.tokens
 .antlr/
 
+#other generate files from IDEs
+.DS_Store
+
 #intelij
 .idea
 *.iml
