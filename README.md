@@ -16,9 +16,22 @@ When you have written a grammar you are ready to test, you first need to right c
 # Demo Video
 
 
-#compilation instructions
+# Compilation and Run Instructions
+Once ANTLR is installed on your machine and you have downloaded our repo, cd into the ParserProject_HawaiianCrew directory
+From there you will run the following commands from your commad line:
 
-1. First cd into the src/antlr directory.
-2. Second run the ```$ java -jar ./lib/antlr-4.9.2-complete.jar ./grammar/grammarTest.g4``` command (this updates the generated files in the antlr directory)
-3. Third run the ```$ javac -cp ./lib/antlr-4.9.2-complete.jar grammarTest*.java``` command (this compiles the generated java codes in the antlr directory)
-4. Forth run the ```$ java -cp ./lib/antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig grammarTest prog -gui ./testCode/python_test_code.py``` command. If all works, this should produce the parse tree
+First we will run this command to generate the needed files to run our grammar using ANTLR
+```
+antlr4 pythonGrammar/PythonGrammar.g4
+```
+Next we will compile all of the generated java code that was produced from the previous command
+```
+javac pythonGrammar/PythonGrammar*.java
+```
+Now go back one directory. This should be the ParserProject_HawaiianCrew directory
+
+And finally, to run the parser and see the parse tree output we will run this command
+```
+grun pythonGrammar.PythonGrammar prog pythonGrammar/tests/python_test_code.py -gui &
+```
+Do note: if you like to run our parser with another file, you can do so by placing the wanted file in the ParserProject_HawaiianCrew/pythonGrammar/tests directory and replace the snippet ```pythonGrammar/tests/python_test_code.py``` from the previous command with ```pythonGrammar/tests/<your file here>```
