@@ -1,7 +1,5 @@
 grammar PythonGrammar;
 
-
-
 @header {
 	package pythonGrammar;
 }
@@ -141,38 +139,50 @@ grammar PythonGrammar;
 	}
 }
 
-prog: (control_flow | statement)* EOF;
+prog: (block)? EOF;
 
 function: FUNCTION OPEN_PAREN expr+ (','+expr)* CLOSE_PAREN;
 
-control_flow: if_statement | while_statement | for_loop;
+variable_def: ID assignment expr;
 
-if_statement: 'if' OPEN_PAREN? expr CLOSE_PAREN? ':' block ('elif' expr ':' block)* ('else:' block)?;
+control_flow: if_structure | while_statement | for_loop;
+
+if_structure: if_statement (elif_statement)* else_statment?;
+
+if_statement: IF OPEN_PAREN? expr CLOSE_PAREN? COLON block;
+
+elif_statement: ELIF expr COLON block;
+
+else_statment: ELSE COLON block;
 
 for_loop: FOR ID IN function COLON block;
 
-while_statement: 'while' expr ':' block;
+while_statement: WHILE expr COLON block;
 
-statement: (decl | COMMENT | expr | function) NEWLINE;
+comment: COMMENT NEWLINE;
 
-block: (statement | control_flow) | NEWLINE INDENT (statement | control_flow)+ DEDENT;
+block: ((comment | variable_def | control_flow | statement) NEWLINE?)+ | NEWLINE INDENT (comment | variable_def | control_flow| statement)+ DEDENT;
 
-decl: ID '=' expr;
+statement: expr NEWLINE;
 
-expr: expr CONDITIONAL expr
-    | expr ARITHMETIC expr
-    | expr ASSIGNMENT expr
+expr: expr conditional expr
+    | expr arithmetic expr
+    | expr assignment expr
     | ID
     | NUM
     | STRING
     | function
     ;
-    
+
+arithmetic: ARITHMETIC;
+conditional: CONDITIONAL;
+assignment: ASSIGNMENT;
+
 COMMENT: '#' ~[\r\n\f]*;
 
-IF_STATEMENT: 'if';
-ELIF_STATEMENT: 'elif';
-ELSE_STATEMENT: 'else';
+IF: 'if';
+ELIF: 'elif';
+ELSE: 'else';
 WHILE: 'while';
 FOR: 'for';
 IN: 'in';
@@ -191,6 +201,7 @@ ARITHMETIC  : '*'
             | '%'
             | '^'
             ;
+
 ASSIGNMENT  : '='
             | '+='
             | '-='
