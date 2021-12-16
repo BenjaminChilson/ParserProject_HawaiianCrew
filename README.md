@@ -36,4 +36,5 @@ grun pythonGrammar.PythonGrammar prog tests/python_test_code.py -gui &
 ```
 Do note: if you like to run our parser with another file, you can do so by placing the wanted file in the ParserProject_HawaiianCrew/tests directory and replace the snippet ```tests/python_test_code.py``` from the previous command with ```tests/<your file here>```
 
-Here is a great resource that helped me out using Ubuntu on Windows Subsystem for Linux: [Testing Grammar using ANTLR](https://blog.knoldus.com/testing-grammar-using-antlr4-testrig-grun/), especially steps 4 and 5.
+### For Ubuntu/WSL
+Here is a great resource that helped me out using Ubuntu on Windows Subsystem for Linux: [Testing Grammar using ANTLR](https://blog.knoldus.com/testing-grammar-using-antlr4-testrig-grun/), especially steps 3-6. It is also worth noting that you should not `sudo apt install` grun or antlr4, but instead add those commands as aliases.
