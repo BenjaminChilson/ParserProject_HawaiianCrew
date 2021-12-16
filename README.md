@@ -4,12 +4,12 @@ We are implementing a parser for the Python languague using ANTLR and Java
 Group Members: Benjamin Chilson, Matt Hackman, and Nate Beattie
 
 # Requirements:
-## Java
-install Java version 1.7 or higher.
-## ANTLR
-install ANTLR for your system. We are utilizing ANTLR v4 for this project.
-Install Instruction for your Operating System can be found here: https://github.com/antlr/antlr4/blob/master/doc/getting-started.md
-or here: https://www.antlr.org/
+Java:
+    Install Java version 1.7 or higher.
+ANTLR:
+    Install ANTLR for your system. We are utilizing ANTLR v4 for this project.
+    Install Instruction for your Operating System can be found here: https://github.com/antlr/antlr4/blob/master/doc/getting-started.md
+    or here: https://www.antlr.org/
 
 # Demo Video
 
