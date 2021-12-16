@@ -1,3 +1,9 @@
+#antlr auto-generated files
+pythonGrammar/*.java
+pythonGrammar/*.interp
+pythonGrammar/*.tokens
+.antlr/
+
 #intelij
 .idea
 *.iml

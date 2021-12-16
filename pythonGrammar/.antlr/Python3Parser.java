@@ -1,4 +1,4 @@
-// Generated from Python3.g4 by ANTLR 4.9.2
+// Generated from c:\Users\benja\CS_Courses\ParserProject_HawaiianCrew\pythonGrammar\Python3.g4 by ANTLR 4.8
 
 	package python3;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class Python3Parser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -39,7 +39,7 @@ public class Python3Parser extends Parser {
 		return new String[] {
 			null, "','", "'else:'", "'='", null, "'if'", "'elif'", "'else'", "'while'", 
 			"'for'", "'in'", "'('", "')'", null, null, null, null, null, null, null, 
-			"':'", null, "'addujfnfsncns'", "'bcsdncdncjknsjncd'"
+			"':'", null, "'addu#@#jfn*fsncn#!(#*s'", "'bcsdncd3!#(8!)#ncjknsjncd'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
