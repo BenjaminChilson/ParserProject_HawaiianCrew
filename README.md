@@ -5,11 +5,11 @@ Group Members: Benjamin Chilson, Matt Hackman, and Nate Beattie
 
 # Requirements:
 *Java:
-    **Install Java version 1.7 or higher.
+  *Install Java version 1.7 or higher.
 
 *ANTLR:
-    **Install ANTLR for your system. We are utilizing ANTLR v4 for this project.
-    **Install Instruction for your Operating System can be found [here](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md "ANLTLR docs") or [here](https://www.antlr.org/ "ANTLR website")
+  *Install ANTLR for your system. We are utilizing ANTLR v4 for this project.
+  *Install Instruction for your Operating System can be found [here](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md "ANLTLR docs") or [here](https://www.antlr.org/ "ANTLR website")
 
 # Demo Video
 
