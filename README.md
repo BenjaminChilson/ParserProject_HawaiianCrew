@@ -17,21 +17,21 @@ When you have written a grammar you are ready to test, you first need to right c
 
 
 # Compilation and Run Instructions
-Once ANTLR is installed on your machine and you have downloaded our repo, cd into the ParserProject_HawaiianCrew directory
-From there you will run the following commands from your commad line:
+Once ANTLR is installed on your machine and you have downloaded our repo, cd into the ParserProject_HawaiianCrew/pythonGrammar directory
+From there you will run the following commands from your command line:
 
 First we will run this command to generate the needed files to run our grammar using ANTLR
 ```
-antlr4 pythonGrammar/PythonGrammar.g4
+antlr4 PythonGrammar.g4
 ```
 Next we will compile all of the generated java code that was produced from the previous command
 ```
-javac pythonGrammar/PythonGrammar*.java
+javac PythonGrammar*.java
 ```
 Now go back one directory. This should be the ParserProject_HawaiianCrew directory
 
 And finally, to run the parser and see the parse tree output we will run this command
 ```
-grun pythonGrammar.PythonGrammar prog pythonGrammar/tests/python_test_code.py -gui &
+grun pythonGrammar.PythonGrammar prog tests/python_test_code.py -gui &
 ```
-Do note: if you like to run our parser with another file, you can do so by placing the wanted file in the ParserProject_HawaiianCrew/pythonGrammar/tests directory and replace the snippet ```pythonGrammar/tests/python_test_code.py``` from the previous command with ```pythonGrammar/tests/<your file here>```
+Do note: if you like to run our parser with another file, you can do so by placing the wanted file in the ParserProject_HawaiianCrew/tests directory and replace the snippet ```tests/python_test_code.py``` from the previous command with ```tests/<your file here>```
