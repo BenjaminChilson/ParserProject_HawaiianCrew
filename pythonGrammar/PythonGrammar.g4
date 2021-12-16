@@ -21,6 +21,7 @@ grammar PythonGrammar;
         tokens.offer(t);
     }
 
+    //gets the next token from the character stream
     @Override
     public Token nextToken() {
         // Check if the end-of-file is ahead and there are still some DEDENTS expected.
@@ -55,26 +56,21 @@ grammar PythonGrammar;
         return tokens.isEmpty() ? next : tokens.poll();
     }
 
+    //creates a dedent token for our token list
     private Token createDedent() {
         CommonToken dedent = commonToken(DEDENT, "");
         dedent.setLine(this.lastToken.getLine());
         return dedent;
     }
 
+    //helper function for generating commonTokens we need
     private CommonToken commonToken(int type, String text) {
         int stop = this.getCharIndex() - 1;
         int start = text.isEmpty() ? stop : stop - text.length() + 1;
         return new CommonToken(this._tokenFactorySourcePair, type, DEFAULT_TOKEN_CHANNEL, start, stop);
     }
 
-    // Calculates the indentation of the provided spaces, taking the
-    // following rules into account:
-    //
-    // "Tabs are replaced (from left to right) by one to eight spaces
-    //  such that the total number of characters up to and including
-    //  the replacement is a multiple of eight [...]"
-    //
-    //  -- https://docs.python.org/3.1/reference/lexical_analysis.html#indentation
+    // Calculates the indentation of the provided spaces
     static int getIndentationCount(String spaces) {
         int count = 0;
         for (char ch : spaces.toCharArray()) {
@@ -91,18 +87,22 @@ grammar PythonGrammar;
         return count;
     }
 
+    //checks if the stream is pointing to the beginning of the stream
     boolean atStartOfInput() {
         return super.getCharPositionInLine() == 0 && super.getLine() == 1;
     }
 
+    //keeps track of open brace counts
     void openBrace(){
         this.opened++;
     }
 
+    //removes from the open brace count
     void closeBrace(){
         this.opened--;
     }
 
+    //runs to check indentions when newline has occured
     void onNewLine(){
         String newLine = getText().replaceAll("[^\r\n\f]+", "");
         String spaces = getText().replaceAll("[\r\n\f]+", "");
@@ -120,6 +120,8 @@ grammar PythonGrammar;
             emit(commonToken(NEWLINE, newLine));
             int indent = getIndentationCount(spaces);
             int previous = indents.isEmpty() ? 0 : indents.peek();
+
+            //corrects indention level
             if (indent == previous) {
                 // skip indents of the same size as the present indent-size
                 skip();
@@ -139,6 +141,8 @@ grammar PythonGrammar;
 	}
 }
 
+
+//PARSER RULES
 prog: (block)? EOF;
 
 function: FUNCTION OPEN_PAREN expr+ (','+expr)* CLOSE_PAREN;
@@ -178,6 +182,8 @@ arithmetic: ARITHMETIC;
 conditional: CONDITIONAL;
 assignment: ASSIGNMENT;
 
+
+//LEXER RULES
 COMMENT: '#' ~[\r\n\f]*;
 
 IF: 'if';
