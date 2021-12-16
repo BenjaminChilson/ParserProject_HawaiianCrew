@@ -1,9 +1,9 @@
-grammar Python3;
+grammar PythonGrammar;
 
 
 
 @header {
-	package python3;
+	package pythonGrammar;
 }
 
 /// Java code borrowed from 
